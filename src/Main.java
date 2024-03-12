@@ -91,6 +91,9 @@ public class Main {
         System.out.println(Employee[maxSalaryEmployee].getName() + " - сотрудник с наибольшей зарплатой: "
                 + Employee[maxSalaryEmployee].getSalary());
         System.out.println("Среднее значение зарплат: " + totalSalary / Main.Employee.counter);
+        for (int i = 0; i < Main.Employee.counter; i++) {
+            System.out.println(Employee[i].getName());
+        }
     }
 
     public static class Employee {
