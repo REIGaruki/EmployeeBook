@@ -149,11 +149,11 @@ public class Main {
                                 calculateTotalSalary(employee, dept));
                         break;
                     case 3:
-                        System.out.println("Сотрудник с наименьшей зарплатой: ");
+                        System.out.println("Сотрудник " + dept + " с наименьшей зарплатой: ");
                         printInfo(findMinSalary(employee, dept));
                         break;
                     case 4:
-                        System.out.println("Сотрудник с наибольшей зарплатой: ");
+                        System.out.println("Сотрудник " + dept + " снаибольшей зарплатой: ");
                         printInfo(findMaxSalary(employee, dept));
                         break;
                     case 5:
