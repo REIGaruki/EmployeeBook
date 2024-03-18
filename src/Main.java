@@ -153,7 +153,7 @@ public class Main {
                         printInfo(findMinSalary(employee, dept));
                         break;
                     case 4:
-                        System.out.println("Сотрудник " + dept + " снаибольшей зарплатой: ");
+                        System.out.println("Сотрудник " + dept + " с наибольшей зарплатой: ");
                         printInfo(findMaxSalary(employee, dept));
                         break;
                     case 5:
