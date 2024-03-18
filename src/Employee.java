@@ -1,14 +1,14 @@
 public class Employee {
-    private int id;
+    private final int id;
     public static int counter;
     static {
         counter = 0;
     }
-    String dept;
-    String firstName;
-    String middleName;
-    String secondName;
-    double salary;
+    private String dept;
+    private String firstName;
+    private String middleName;
+    private String secondName;
+    private double salary;
 
     public Employee() {
         id = ++counter;

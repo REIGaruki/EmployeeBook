@@ -1,68 +1,80 @@
 import java.util.Scanner;
 
 public class Main {
+    public static class Department {
+        public String deptName;
+        public Department(String deptName) {
+            this.deptName = deptName;
+        }
+    }
     public static void main(String[] args) {
+        Department[] department = new Department[5]; // объявление массива оюъектов "Отдел"
+        department[0] = new Department("1");
+        department[1] = new Department("2");
+        department[2] = new Department("3");
+        department[3] = new Department("4");
+        department[4] = new Department("5");
         Employee[] employee = new Employee[10]; // объявление массива оюъектов "Сотрудник"
         // заполнение массива
         employee[0] = new Employee();
-        employee[0].setFirstName("Иван");
+        employee[0].setFirstName("Михаил");
         employee[0].setMiddleName("Иванович");
-        employee[0].setSecondName("Иванов");
-        employee[0].setDept(1);
+        employee[0].setSecondName("Глинка");
+        employee[0].setDept(department[0].deptName);
         employee[0].setSalary(30000);
         employee[1] = new Employee();
-        employee[1].setFirstName("Петр");
+        employee[1].setFirstName("Модест");
         employee[1].setMiddleName("Петрович");
-        employee[1].setSecondName("Петров");
-        employee[1].setDept(2);
+        employee[1].setSecondName("Мусоргский");
+        employee[1].setDept(department[1].deptName);
         employee[1].setSalary(40000);
         employee[2] = new Employee();
-        employee[2].setFirstName("Сидор");
-        employee[2].setMiddleName("Сидорович");
-        employee[2].setSecondName("Сидоров");
-        employee[2].setDept(3);
+        employee[2].setFirstName("Сергей");
+        employee[2].setMiddleName("Васильевич");
+        employee[2].setSecondName("Рахманинов");
+        employee[2].setDept(department[2].deptName);
         employee[2].setSalary(35000);
         employee[3] = new Employee();
-        employee[3].setFirstName("Елена");
-        employee[3].setMiddleName("Николаевна");
-        employee[3].setSecondName("Посадова");
-        employee[3].setDept(4);
+        employee[3].setFirstName("Петр");
+        employee[3].setMiddleName("Ильич");
+        employee[3].setSecondName("Чайковский");
+        employee[3].setDept(department[3].deptName);
         employee[3].setSalary(37000);
         employee[4] = new Employee();
-        employee[4].setFirstName("Анастасия");
-        employee[4].setMiddleName("Дмитриевна");
-        employee[4].setSecondName("Дмитриева");
-        employee[4].setDept(5);
+        employee[4].setFirstName("Александр");
+        employee[4].setMiddleName("Порфирьевич");
+        employee[4].setSecondName("Бородин");
+        employee[4].setDept(department[4].deptName);
         employee[4].setSalary(45000);
         employee[5] = new Employee();
-        employee[5].setFirstName("Мария");
-        employee[5].setMiddleName("Леонидовна");
-        employee[5].setSecondName("Павлова");
-        employee[5].setDept(1);
+        employee[5].setFirstName("Николай");
+        employee[5].setMiddleName("Андреевич");
+        employee[5].setSecondName("Римский-Корсаков");
+        employee[5].setDept(department[0].deptName);
         employee[5].setSalary(27000);
         employee[6] = new Employee();
-        employee[6].setFirstName("Тимур");
+        employee[6].setFirstName("Александр");
         employee[6].setMiddleName("Николаевич");
-        employee[6].setSecondName("Надзоров");
-        employee[6].setDept("2");
+        employee[6].setSecondName("Скрябин");
+        employee[6].setDept(department[1].deptName);
         employee[6].setSalary(31000);
         employee[7] = new Employee();
-        employee[7].setFirstName("Ирина");
-        employee[7].setMiddleName("Максимовна");
-        employee[7].setSecondName("Швец");
-        employee[7].setDept(3);
+        employee[7].setFirstName("Дмитрий");
+        employee[7].setMiddleName("Дмитриевич");
+        employee[7].setSecondName("Шостакович");
+        employee[7].setDept(department[2].deptName);
         employee[7].setSalary(28000);
         employee[9] = new Employee();
-        employee[9].setFirstName("Екатерина");
-        employee[9].setMiddleName("Владимировна");
-        employee[9].setSecondName("Володина");
-        employee[9].setDept(5);
+        employee[9].setFirstName("Сергей");
+        employee[9].setMiddleName("Сергеевич");
+        employee[9].setSecondName("Прокофьев");
+        employee[9].setDept(department[3].deptName);
         employee[9].setSalary(32000);
         employee[8] = new Employee();
-        employee[8].setFirstName("Алена");
-        employee[8].setMiddleName("Викторовна");
-        employee[8].setSecondName("Евклидова");
-        employee[8].setDept("4");
+        employee[8].setFirstName("Игорь");
+        employee[8].setMiddleName("Федорович");
+        employee[8].setSecondName("Стравинский");
+        employee[8].setDept(department[4].deptName);
         employee[8].setSalary(39000);
         // работа с массивом сотрудников
         Scanner scan = new Scanner(System.in);
@@ -90,10 +102,12 @@ public class Main {
                         System.out.println("Общая зарплата сотрудников за месяц: " + calculateTotalSalary(employee));
                         break;
                     case 3:
-                        printMinSalary(employee);
+                        System.out.println("Сотрудник с наименьшей зарплатой: ");
+                        printInfo(findMinSalary(employee));
                         break;
                     case 4:
-                        printMaxSalary(employee);
+                        System.out.println("Сотрудник с наибольшей зарплатой: ");
+                        printInfo(findMaxSalary(employee));
                         break;
                     case 5:
                         System.out.println("Среднее значение зарплат: " + calculateAverageSalary(employee));
@@ -101,7 +115,8 @@ public class Main {
                     case 6:
                         System.out.println(" Индексирование зарплаты, нужно ввести процент");
                         int index = scan.nextInt();
-                        printIndexedSalary(employee, index);
+                        calculateIndexedSalary(employee, index);
+                        printAllInfo(employee);
                         break;
                     case 7:
                         System.out.println(" Нужно ввести зарплату для проверки");
@@ -134,18 +149,25 @@ public class Main {
                                 calculateTotalSalary(employee, dept));
                         break;
                     case 3:
-                        printMinSalary(employee, dept);
+                        System.out.println("Сотрудник с наименьшей зарплатой: ");
+                        printInfo(findMinSalary(employee, dept));
                         break;
                     case 4:
-                        printMaxSalary(employee, dept);
+                        System.out.println("Сотрудник с наибольшей зарплатой: ");
+                        printInfo(findMaxSalary(employee, dept));
                         break;
                     case 5:
-                        printAverageSalary(employee, dept);
+                        System.out.println("Среднее значение зарплат отдела " + dept + ": " +
+                                calculateAverageSalary(employee, dept));
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + command);
                 }
+            } else {
+                throw new IllegalStateException("Unexpected value: " + command);
             }
+        } else {
+            throw new IllegalStateException("IS NULL");
         }
     }
     // распечатка полной инофрмации в списке сотрудников
@@ -167,7 +189,7 @@ public class Main {
         return  totalSalary;
     }
     // нахождение сотрудника с минимальной зарплатой
-    public static void printMinSalary(Employee[] employeeList) {
+    public static Employee findMinSalary(Employee[] employeeList) {
         int minSalaryEmployee = 0;
         double minimalSalary = (double) Integer.MAX_VALUE;
         for (int i = 0; i < employeeList.length; i++) {
@@ -176,11 +198,10 @@ public class Main {
                 minSalaryEmployee = i;
             }
         }
-        System.out.println(employeeList[minSalaryEmployee].getName() + " - сотрудник с наименьшей зарплатой: "
-                + employeeList[minSalaryEmployee].getSalary());
+        return employeeList[minSalaryEmployee];
     }
     // нахождение сотрудника с максимальной зарплатой
-    public static void printMaxSalary(Employee[] employeeList) {
+    public static Employee findMaxSalary(Employee[] employeeList) {
         double maximalSalary = 0;
         int maxSalaryEmployee = 0;
         for (int i = 0; i < employeeList.length; i++) {
@@ -189,8 +210,7 @@ public class Main {
                 maxSalaryEmployee = i;
             }
         }
-        System.out.println(employeeList[maxSalaryEmployee].getName() + " - сотрудник с наибольшей зарплатой: "
-                + employeeList[maxSalaryEmployee].getSalary());
+        return employeeList[maxSalaryEmployee];
     }
     // расчет среднего арифметического зарплат всех сотрудников
     public static double calculateAverageSalary(Employee[] employeeList) {
@@ -210,16 +230,15 @@ public class Main {
         return salary;
     }
     // индексирование зарплат
-    public static void printIndexedSalary(Employee[] employeeList, int index) {
+    public static void calculateIndexedSalary(Employee[] employeeList, int index) {
         for (int i = 0; i < employeeList.length; i++) {
             if (employeeList[i] != null) {
                 double indexedSalary = indexing(employeeList[i].getSalary(), index);
                 employeeList[i].setSalary(indexedSalary);
-                System.out.println("Номер сотрудника: " + employeeList[i].getID());
-                System.out.println("Зарплата проидексированная на " + index + "% равна " + employeeList[i].getSalary());
             }
         }
     }
+    // информация по одному сотруднику отдела
     public static void printInfo(Employee[] employeeList, String dept) {
         System.out.println("Сотрудники отдела " + dept + ":");
         for (int i = 0; i < employeeList.length; i++) {
@@ -255,7 +274,7 @@ public class Main {
         return  totalSalary;
     }
     // расчет среднего арифметического зарплат всех сотрудников отдела
-    public static void printAverageSalary(Employee[] employeeList, String dept) {
+    public static double calculateAverageSalary(Employee[] employeeList, String dept) {
         int deptEmployeeCount = 0;
         for (int i = 0; i < employeeList.length; i++) {
             if (employeeList[i] != null && dept.equals(employeeList[i].getDept())) {
@@ -263,14 +282,13 @@ public class Main {
             }
         }
         if (deptEmployeeCount == 0) {
-            System.out.println("В отделе никто не работает");
+            return 0;
         } else {
-            double averageSalary = calculateTotalSalary(employeeList, dept) / deptEmployeeCount;
-            System.out.println("Среднее значение зарплат отдела " + dept + ": " + averageSalary);
+            return calculateTotalSalary(employeeList, dept) / deptEmployeeCount;
         }
     }
     // нахождение сотрудника отдела с минимальной зарплатой
-    public static void printMinSalary(Employee[] employeeList, String dept) {
+    public static Employee findMinSalary(Employee[] employeeList, String dept) {
         int minSalaryEmployee = 0;
         double minimalSalary = (double) Integer.MAX_VALUE;
         for (int i = 0; i < employeeList.length; i++) {
@@ -279,11 +297,10 @@ public class Main {
                 minSalaryEmployee = i;
             }
         }
-        System.out.println(employeeList[minSalaryEmployee].getName() + " - сотрудник отдела " + dept + " с наименьшей зарплатой: "
-                + employeeList[minSalaryEmployee].getSalary());
+        return employeeList[minSalaryEmployee];
     }
     // нахождение сотрудника с максимальной зарплатой
-    public static void printMaxSalary(Employee[] employeeList, String dept) {
+    public static Employee findMaxSalary(Employee[] employeeList, String dept) {
         double maximalSalary = 0;
         int maxSalaryEmployee = 0;
         for (int i = 0; i < employeeList.length; i++) {
@@ -292,8 +309,7 @@ public class Main {
                 maxSalaryEmployee = i;
             }
         }
-        System.out.println(employeeList[maxSalaryEmployee].getName() + " - сотрудник отдела " + dept + " с наибольшей зарплатой: "
-                + employeeList[maxSalaryEmployee].getSalary());
+        return employeeList[maxSalaryEmployee];
     }
     public static void printSalaryComparisonLess(Employee[] employeeList, double salary) {
         for (int i = 0; i < employeeList.length; i++) {
