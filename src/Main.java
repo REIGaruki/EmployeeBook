@@ -8,13 +8,13 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        Department[] department = new Department[5]; // объявление массива оюъектов "Отдел"
+        Department[] department = new Department[5]; // объявление массива объектов "Отдел"
         department[0] = new Department("1");
         department[1] = new Department("2");
         department[2] = new Department("3");
         department[3] = new Department("4");
         department[4] = new Department("5");
-        Employee[] employee = new Employee[10]; // объявление массива оюъектов "Сотрудник"
+        Employee[] employee = new Employee[10]; // объявление массива объектов "Сотрудник"
         // заполнение массива
         employee[0] = new Employee();
         employee[0].setFirstName("Михаил");
@@ -325,20 +325,64 @@ public class Main {
             }
         }
     }
-    public static Employee getEmployeeByID(Employee[] employeeList, int number) {
+    public static int getEmployeeByID(Employee[] employeeList, int number) {
         for (int i = 0; i< employeeList.length; i++) {
             if (employeeList[i].getID() == number) {
-                return employeeList[i];
+                return i;
             }
         }
-        return null;
+        return -1;
     }
     public static boolean checkFreeSpace(Employee[] employeeList) {
-        for (int i = 0; i< employeeList.length; i++) {
+        for (int i = 0; i < employeeList.length; i++) {
             if (employeeList[i] == null) {
                 return true;
             }
         }
         return false;
+    }
+    public static int findFreeSpace(Employee[] employeeList) {
+        for (int i = 0; i < employeeList.length; i++) {
+            if (employeeList[i] == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    public static void deleteEmployeeByID(Employee[] employeeList, int employeeID) {
+        employeeList[getEmployeeByID(employeeList, employeeID)] = null;
+    }
+    public static void createNewEmployee(Employee[] employeeList, Department[] departments) {
+        if (checkFreeSpace(employeeList)) {
+            Scanner scan = new Scanner(System.in);
+            int free = findFreeSpace(employeeList);
+            String firstName = "";
+            String secondName = "";
+            String middleName = "";
+            System.out.println("Веедите имя");
+            if (scan.hasNextLine()) {
+                firstName = scan.nextLine();
+            }
+            System.out.println("Веедите фамилию");
+            if (scan.hasNextLine()) {
+                secondName = scan.nextLine();
+            }
+            System.out.println("Веедите отчество");
+            if (scan.hasNextLine()) {
+                middleName = scan.nextLine();
+            }
+            System.out.println("Веедите номер отдела");
+            int deptNumber = scan.nextInt() - 1;
+            System.out.println("Веедите значение заработной платы");
+            double salary = scan.nextDouble();
+            employeeList[free] = new Employee();
+            employeeList[free].setFirstName(firstName);
+            employeeList[free].setMiddleName(middleName);
+            employeeList[free].setSecondName(secondName);
+            employeeList[free].setDept(departments[deptNumber].deptName);
+            employeeList[free].setSalary(salary);
+        }  else {
+            System.out.println("EMPLOYEE BOOK IS FULL");
+        }
     }
 }
