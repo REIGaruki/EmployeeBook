@@ -333,4 +333,12 @@ public class Main {
         }
         return null;
     }
+    public static boolean checkFreeSpace(Employee[] employeeList) {
+        for (int i = 0; i< employeeList.length; i++) {
+            if (employeeList[i] == null) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
