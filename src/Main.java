@@ -325,4 +325,12 @@ public class Main {
             }
         }
     }
+    public static Employee getEmployeeByID(Employee[] employeeList, int number) {
+        for (int i = 0; i< employeeList.length; i++) {
+            if (employeeList[i].getID() == number) {
+                return employeeList[i];
+            }
+        }
+        return null;
+    }
 }
