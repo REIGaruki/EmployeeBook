@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    private class EmployeeBook {
+    private static class EmployeeBook {
         private Employee[] employee;
         private EmployeeBook(Employee[] employee) {
             this.employee = employee;
@@ -128,7 +128,8 @@ public class Main {
             int minSalaryEmployee = 0;
             double minimalSalary = (double) Integer.MAX_VALUE;
             for (int i = 0; i < employeeList.length; i++) {
-                if (employeeList[i] != null && employeeList[i].getSalary() < minimalSalary && dept.equals(employeeList[i].getDept())) {
+                if (employeeList[i] != null && employeeList[i].getSalary() < minimalSalary &&
+                        dept.equals(employeeList[i].getDept())) {
                     minimalSalary = employeeList[i].getSalary();
                     minSalaryEmployee = i;
                 }
@@ -140,7 +141,8 @@ public class Main {
             double maximalSalary = 0;
             int maxSalaryEmployee = 0;
             for (int i = 0; i < employeeList.length; i++) {
-                if (employeeList[i] != null && employeeList[i].getSalary() > maximalSalary && dept.equals(employeeList[i].getDept())) {
+                if (employeeList[i] != null && employeeList[i].getSalary() > maximalSalary &&
+                        dept.equals(employeeList[i].getDept())) {
                     maximalSalary = employeeList[i].getSalary();
                     maxSalaryEmployee = i;
                 }
@@ -215,20 +217,14 @@ public class Main {
                 employeeList[free].setFirstName(firstName);
                 employeeList[free].setMiddleName(middleName);
                 employeeList[free].setSecondName(secondName);
-                employeeList[free].setDept(departments[deptNumber].deptName);
+                employeeList[free].setDept(departments[deptNumber].getDeptName());
                 employeeList[free].setSalary(salary);
             }  else {
                 System.out.println("EMPLOYEE BOOK IS FULL");
             }
         }
     }
-    public static class Department {
-        public String deptName;
-        public Department(String deptName) {
-            this.deptName = deptName;
-        }
-    }
-    public void main(String[] args) {
+    public static void main(String[] args) {
         Department[] department = new Department[5]; // объявление массива объектов "Отдел"
         department[0] = new Department("1");
         department[1] = new Department("2");
@@ -238,73 +234,74 @@ public class Main {
         Employee[] employee = new Employee[10]; // объявление массива объектов "Сотрудник"
         EmployeeBook employeeBook = new EmployeeBook(employee);
         // заполнение массива
-        employee[0] = new Employee();
-        employee[0].setFirstName("Михаил");
-        employee[0].setMiddleName("Иванович");
-        employee[0].setSecondName("Глинка");
-        employee[0].setDept(department[0].deptName);
-        employee[0].setSalary(30000);
-        employee[1] = new Employee();
-        employee[1].setFirstName("Модест");
-        employee[1].setMiddleName("Петрович");
-        employee[1].setSecondName("Мусоргский");
-        employee[1].setDept(department[1].deptName);
-        employee[1].setSalary(40000);
-        employee[2] = new Employee();
-        employee[2].setFirstName("Сергей");
-        employee[2].setMiddleName("Васильевич");
-        employee[2].setSecondName("Рахманинов");
-        employee[2].setDept(department[2].deptName);
-        employee[2].setSalary(35000);
-        employee[3] = new Employee();
-        employee[3].setFirstName("Петр");
-        employee[3].setMiddleName("Ильич");
-        employee[3].setSecondName("Чайковский");
-        employee[3].setDept(department[3].deptName);
-        employee[3].setSalary(37000);
-        employee[4] = new Employee();
-        employee[4].setFirstName("Александр");
-        employee[4].setMiddleName("Порфирьевич");
-        employee[4].setSecondName("Бородин");
-        employee[4].setDept(department[4].deptName);
-        employee[4].setSalary(45000);
-        employee[5] = new Employee();
-        employee[5].setFirstName("Николай");
-        employee[5].setMiddleName("Андреевич");
-        employee[5].setSecondName("Римский-Корсаков");
-        employee[5].setDept(department[0].deptName);
-        employee[5].setSalary(27000);
-        employee[6] = new Employee();
-        employee[6].setFirstName("Александр");
-        employee[6].setMiddleName("Николаевич");
-        employee[6].setSecondName("Скрябин");
-        employee[6].setDept(department[1].deptName);
-        employee[6].setSalary(31000);
-        employee[7] = new Employee();
-        employee[7].setFirstName("Дмитрий");
-        employee[7].setMiddleName("Дмитриевич");
-        employee[7].setSecondName("Шостакович");
-        employee[7].setDept(department[2].deptName);
-        employee[7].setSalary(28000);
-        employee[9] = new Employee();
-        employee[9].setFirstName("Сергей");
-        employee[9].setMiddleName("Сергеевич");
-        employee[9].setSecondName("Прокофьев");
-        employee[9].setDept(department[3].deptName);
-        employee[9].setSalary(32000);
-        employee[8] = new Employee();
-        employee[8].setFirstName("Игорь");
-        employee[8].setMiddleName("Федорович");
-        employee[8].setSecondName("Стравинский");
-        employee[8].setDept(department[4].deptName);
-        employee[8].setSalary(39000);
+        employeeBook.employee[0] = new Employee();
+        employeeBook.employee[0].setFirstName("Михаил");
+        employeeBook.employee[0].setMiddleName("Иванович");
+        employeeBook.employee[0].setSecondName("Глинка");
+        employeeBook.employee[0].setDept(department[0].getDeptName());
+        employeeBook.employee[0].setSalary(30000);
+        employeeBook.employee[1] = new Employee();
+        employeeBook.employee[1].setFirstName("Модест");
+        employeeBook.employee[1].setMiddleName("Петрович");
+        employeeBook.employee[1].setSecondName("Мусоргский");
+        employeeBook.employee[1].setDept(department[1].getDeptName());
+        employeeBook.employee[1].setSalary(40000);
+        employeeBook.employee[2] = new Employee();
+        employeeBook.employee[2].setFirstName("Сергей");
+        employeeBook.employee[2].setMiddleName("Васильевич");
+        employeeBook.employee[2].setSecondName("Рахманинов");
+        employeeBook.employee[2].setDept(department[2].getDeptName());
+        employeeBook.employee[2].setSalary(35000);
+        employeeBook.employee[3] = new Employee();
+        employeeBook.employee[3].setFirstName("Петр");
+        employeeBook.employee[3].setMiddleName("Ильич");
+        employeeBook.employee[3].setSecondName("Чайковский");
+        employeeBook.employee[3].setDept(department[3].getDeptName());
+        employeeBook.employee[3].setSalary(37000);
+        employeeBook.employee[4] = new Employee();
+        employeeBook.employee[4].setFirstName("Александр");
+        employeeBook.employee[4].setMiddleName("Порфирьевич");
+        employeeBook.employee[4].setSecondName("Бородин");
+        employeeBook.employee[4].setDept(department[4].getDeptName());
+        employeeBook.employee[4].setSalary(45000);
+        employeeBook.employee[5] = new Employee();
+        employeeBook.employee[5].setFirstName("Николай");
+        employeeBook.employee[5].setMiddleName("Андреевич");
+        employeeBook.employee[5].setSecondName("Римский-Корсаков");
+        employeeBook.employee[5].setDept(department[0].getDeptName());
+        employeeBook.employee[5].setSalary(27000);
+        employeeBook.employee[6] = new Employee();
+        employeeBook.employee[6].setFirstName("Александр");
+        employeeBook.employee[6].setMiddleName("Николаевич");
+        employeeBook.employee[6].setSecondName("Скрябин");
+        employeeBook.employee[6].setDept(department[1].getDeptName());
+        employeeBook.employee[6].setSalary(31000);
+        employeeBook.employee[7] = new Employee();
+        employeeBook.employee[7].setFirstName("Дмитрий");
+        employeeBook.employee[7].setMiddleName("Дмитриевич");
+        employeeBook.employee[7].setSecondName("Шостакович");
+        employeeBook.employee[7].setDept(department[2].getDeptName());
+        employeeBook.employee[7].setSalary(28000);
+        employeeBook.employee[9] = new Employee();
+        employeeBook.employee[9].setFirstName("Сергей");
+        employeeBook.employee[9].setMiddleName("Сергеевич");
+        employeeBook.employee[9].setSecondName("Прокофьев");
+        employeeBook.employee[9].setDept(department[3].getDeptName());
+        employeeBook.employee[9].setSalary(32000);
+        employeeBook.employee[8] = new Employee();
+        employeeBook.employee[8].setFirstName("Игорь");
+        employeeBook.employee[8].setMiddleName("Федорович");
+        employeeBook.employee[8].setSecondName("Стравинский");
+        employeeBook.employee[8].setDept(department[4].getDeptName());
+        employeeBook.employee[8].setSalary(39000);
         // работа с массивом сотрудников
         Scanner scan = new Scanner(System.in);
-        if (employee != null) {
+        if (employeeBook.employee != null) {
             System.out.println("Добро пожаловать, бухгалтер");
             System.out.println("Для работы со всеми сотрудниками введите '0'");
             System.out.println("Для работы с отделом введите '1'");
-            int command = scan.nextInt();
+            int command;
+            command = scan.nextInt();
             if (command == 0) {
                 employeeBook.printEmployeeList(employee);
                 System.out.println("Список доступных действий:");
@@ -318,33 +315,35 @@ public class Main {
                 command = scan.nextInt();
                 switch (command) {
                     case 1:
-                        employeeBook.printAllInfo(employee);
+                        employeeBook.printAllInfo(employeeBook.employee);
                         break;
                     case 2:
-                        System.out.println("Общая зарплата сотрудников за месяц: " + employeeBook.calculateTotalSalary(employee));
+                        System.out.println("Общая зарплата сотрудников за месяц: " +
+                                employeeBook.calculateTotalSalary(employeeBook.employee));
                         break;
                     case 3:
                         System.out.println("Сотрудник с наименьшей зарплатой: ");
-                        employeeBook.printInfo(employeeBook.findMinSalary(employee));
+                        employeeBook.printInfo(employeeBook.findMinSalary(employeeBook.employee));
                         break;
                     case 4:
                         System.out.println("Сотрудник с наибольшей зарплатой: ");
-                        employeeBook.printInfo(employeeBook.findMaxSalary(employee));
+                        employeeBook.printInfo(employeeBook.findMaxSalary(employeeBook.employee));
                         break;
                     case 5:
-                        System.out.println("Среднее значение зарплат: " + employeeBook.calculateAverageSalary(employee));
+                        System.out.println("Среднее значение зарплат: " +
+                                employeeBook.calculateAverageSalary(employeeBook.employee));
                         break;
                     case 6:
                         System.out.println(" Индексирование зарплаты, нужно ввести процент");
                         int index = scan.nextInt();
-                        employeeBook.calculateIndexedSalary(employee, index);
-                        employeeBook.printAllInfo(employee);
+                        employeeBook.calculateIndexedSalary(employeeBook.employee, index);
+                        employeeBook.printAllInfo(employeeBook.employee);
                         break;
                     case 7:
                         System.out.println(" Нужно ввести зарплату для проверки");
                         double salary = scan.nextDouble();
-                        employeeBook.printSalaryComparisonMore(employee, salary);
-                        employeeBook.printSalaryComparisonLess(employee, salary);
+                        employeeBook.printSalaryComparisonMore(employeeBook.employee, salary);
+                        employeeBook.printSalaryComparisonLess(employeeBook.employee, salary);
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + command);
@@ -364,23 +363,23 @@ public class Main {
                 command = scan.nextInt();
                 switch (command) {
                     case 1:
-                        employeeBook.printInfo(employee, dept);
+                        employeeBook.printInfo(employeeBook.employee, dept);
                         break;
                     case 2:
                         System.out.println("Общая зарплата сотрудников отдела " + dept + " за месяц: " +
-                                employeeBook.calculateTotalSalary(employee, dept));
+                                employeeBook.calculateTotalSalary(employeeBook.employee, dept));
                         break;
                     case 3:
                         System.out.println("Сотрудник " + dept + " с наименьшей зарплатой: ");
-                        employeeBook.printInfo(employeeBook.findMinSalary(employee, dept));
+                        employeeBook.printInfo(employeeBook.findMinSalary(employeeBook.employee, dept));
                         break;
                     case 4:
                         System.out.println("Сотрудник " + dept + " с наибольшей зарплатой: ");
-                        employeeBook.printInfo(employeeBook.findMaxSalary(employee, dept));
+                        employeeBook.printInfo(employeeBook.findMaxSalary(employeeBook.employee, dept));
                         break;
                     case 5:
                         System.out.println("Среднее значение зарплат отдела " + dept + ": " +
-                                employeeBook.calculateAverageSalary(employee, dept));
+                                employeeBook.calculateAverageSalary(employeeBook.employee, dept));
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + command);
