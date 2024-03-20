@@ -2,24 +2,23 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Department[] department = new Department[5]; // объявление массива объектов "Отдел"
-        department[0] = new Department("Первый");
-        department[1] = new Department("Второй");
-        department[2] = new Department("Третий");
-        department[3] = new Department("Четвертый");
-        department[4] = new Department("Пятый");
         EmployeeBook employeeBook = new EmployeeBook();
+        employeeBook.department[0] = new Department("Первый");
+        employeeBook.department[1] = new Department("Второй");
+        employeeBook.department[2] = new Department("Третий");
+        employeeBook.department[3] = new Department("Четвертый");
+        employeeBook.department[4] = new Department("Пятый");
         // заполнение массива
-        employeeBook.employees[0] = new Employee(department[0], "Глинка", "Михаил", "Иванович", 30000);
-        employeeBook.employees[1] = new Employee(department[1], "Мусоргский", "Модест", "Петрович", 40000);
-        employeeBook.employees[2] = new Employee(department[2], "Рахманинов", "Сергей", "Васильевич", 35000);
-        employeeBook.employees[3] = new Employee(department[3], "Чайковский", "Петр", "Ильич", 37000);
-        employeeBook.employees[4] = new Employee(department[4], "Бородин", "Александр", "Порфирьевич", 45000);
-        employeeBook.employees[5] = new Employee(department[0], "Римский-Корсаков", "Николай", "Андреевич", 27000);
-        employeeBook.employees[6] = new Employee(department[1], "Скрябин", "Александр", "Николаевич", 31000);
-        employeeBook.employees[7] = new Employee(department[2], "Шостакович", "Дмитрий", "Дмитриевич", 28000);
-        employeeBook.employees[8] = new Employee(department[3], "Прокофьев", "Сергей", "Сергеевич", 32000);
-        employeeBook.employees[9] = new Employee(department[4], "Стравинский", "Игорь", "Федорович", 39000);
+        employeeBook.addNewEmployee(1, "Глинка", "Михаил", "Иванович", 30000);
+        employeeBook.addNewEmployee(2, "Мусоргский", "Модест", "Петрович", 40000);
+        employeeBook.addNewEmployee(3, "Рахманинов", "Сергей", "Васильевич", 35000);
+        employeeBook.addNewEmployee(4, "Чайковский", "Петр", "Ильич", 37000);
+        employeeBook.addNewEmployee(5, "Бородин", "Александр", "Порфирьевич", 45000);
+        employeeBook.addNewEmployee(1, "Римский-Корсаков", "Николай", "Андреевич", 27000);
+        employeeBook.addNewEmployee(2, "Скрябин", "Александр", "Николаевич", 31000);
+        employeeBook.addNewEmployee(3, "Шостакович", "Дмитрий", "Дмитриевич", 28000);
+        employeeBook.addNewEmployee(4, "Прокофьев", "Сергей", "Сергеевич", 32000);
+        employeeBook.addNewEmployee(5, "Стравинский", "Игорь", "Федорович", 39000);
         // работа с массивом сотрудников
         System.out.println(employeeBook.employees[1].getID());
         Scanner scan = new Scanner(System.in);
@@ -40,8 +39,8 @@ public class Main {
             System.out.println("7 - Сверить зарплату сотрудников с определенным числом");
             System.out.println("8 - Добавление новой записи о сотруднике");
             System.out.println("9 - Удаление записи о сотруднике");
-            command = scan.nextInt();
-            switch (command) {
+            int workCommand = scan.nextInt();
+            switch (workCommand) {
                 case 1:
                     employeeBook.printAllInfo();
                     break;
@@ -74,7 +73,7 @@ public class Main {
                     break;
                 case 8:
                     System.out.println(" Веедите данные:");
-                    employeeBook.createNewEmployee(department);
+                    employeeBook.createNewEmployee(employeeBook.department);
                     break;
                 case 9:
                     System.out.println(" Веедите номер сотрудника которого хотите удалить:");
@@ -82,7 +81,7 @@ public class Main {
                     employeeBook.deleteEmployeeByID(deleteID);
                     break;
                 default:
-                    throw new IllegalStateException("Unexpected value: " + command);
+                    throw new IllegalStateException("Unexpected value: " + workCommand);
             }
         } else if (command == 1) {
             System.out.println("Нужно ввести отдел");
@@ -93,35 +92,40 @@ public class Main {
             System.out.println("3 - Вывести сотрудника с минимальной зарплатой");
             System.out.println("4 - Вывести сотрудника с максимальной зарплатой");
             System.out.println("5 - Вывести среднее значение зарплат");
-            command = scan.nextInt();
-            switch (command) {
+            int deptCommand = scan.nextInt();
+            switch (deptCommand) {
                 case 1:
-                    employeeBook.printAllInfo(department[dept]);
+                    employeeBook.printAllInfo(employeeBook.department[dept]);
                     break;
                 case 2:
                     System.out.println("Общая зарплата сотрудников отдела " + dept + " за месяц: " +
-                            employeeBook.calculateTotalSalary(department[dept]));
+                            employeeBook.calculateTotalSalary(employeeBook.department[dept]));
                     break;
                 case 3:
                     System.out.println("Сотрудник " + dept + " с наименьшей зарплатой: ");
-                    System.out.println(employeeBook.findMinSalary(department[dept]));
+                    System.out.println(employeeBook.findMinSalary(employeeBook.department[dept]));
                     break;
                 case 4:
                     System.out.println("Сотрудник " + dept + " с наибольшей зарплатой: ");
-                    System.out.println(employeeBook.findMaxSalary(department[dept]));
+                    System.out.println(employeeBook.findMaxSalary(employeeBook.department[dept]));
                     break;
                 case 5:
                     System.out.println("Среднее значение зарплат отдела " + dept + ": " +
-                            employeeBook.calculateAverageSalary(department[dept]));
+                            employeeBook.calculateAverageSalary(employeeBook.department[dept]));
                     break;
                 default:
-                    throw new IllegalStateException("Unexpected value: " + command);
+                    throw new IllegalStateException("Unexpected value: " + deptCommand);
             }
         } else {
             throw new IllegalStateException("Unexpected value: " + command);
         }
     }
+    // конец метода main
+    // конец метода main
+    // конец метода main
     private static class EmployeeBook {
+        Department[] department = new Department[5];
+        // объявление массива объектов "Отдел"
         private final Employee[] employees = new Employee[11];
         // распечатка полной инофрмации в списке сотрудников
         public void printAllInfo() {
@@ -134,7 +138,7 @@ public class Main {
         public void printAllInfo(Department dept) {
             for (Employee employee : employees) {
                 if (employee != null && dept.equals(employee.getDept())) {
-                    System.out.println(employee);
+                    System.out.println(employee.toString(dept));
                 }
             }
         }
@@ -290,6 +294,14 @@ public class Main {
         public void deleteEmployeeByID(int employeeID) {
             employees[getEmployeeByID(employeeID)] = null;
         }
+        public void addNewEmployee(int deptNumber, String secondName, String firstName, String middleName, double salary) {
+            if (checkFreeSpace()) {
+                int free = findFreeSpace();
+                employees[free] = new Employee(department[deptNumber - 1], secondName, firstName, middleName, salary);
+            }  else {
+                System.out.println("EMPLOYEE BOOK IS FULL");
+            }
+        }
         public void createNewEmployee(Department[] departments) {
             if (checkFreeSpace()) {
                 Scanner scan = new Scanner(System.in);
@@ -313,12 +325,7 @@ public class Main {
                 int deptNumber = scan.nextInt() - 1;
                 System.out.println("Веедите значение заработной платы");
                 double salary = scan.nextDouble();
-                employees[free] = new Employee();
-                employees[free].setFirstName(firstName);
-                employees[free].setMiddleName(middleName);
-                employees[free].setSecondName(secondName);
-                employees[free].setDept(departments[deptNumber]);
-                employees[free].setSalary(salary);
+                employees[free] = new Employee(departments[deptNumber], secondName, firstName, middleName, salary);
             }  else {
                 System.out.println("EMPLOYEE BOOK IS FULL");
             }
