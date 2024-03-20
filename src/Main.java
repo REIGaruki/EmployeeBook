@@ -120,6 +120,8 @@ public class Main {
         } else {
             throw new IllegalStateException("Unexpected value: " + command);
         }
+        System.out.println("==========================================================================");
+        employeeBook.printAllInfo();
     }
     // конец метода main
     // конец метода main
