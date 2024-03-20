@@ -85,7 +85,8 @@ public class Main {
             }
         } else if (command == 1) {
             System.out.println("Нужно ввести отдел");
-            int dept = scan.nextInt() - 1;
+            int dept = scan.nextInt();
+            System.out.println("Вы выбрали отдел №" + dept + ", " + employeeBook.department[dept - 1]);
             System.out.println("Список доступных действий:");
             System.out.println("1 - Распечатать полную информацию по сотрудникам");
             System.out.println("2 - Вывести сумму зарплат");
@@ -95,23 +96,23 @@ public class Main {
             int deptCommand = scan.nextInt();
             switch (deptCommand) {
                 case 1:
-                    employeeBook.printAllInfo(employeeBook.department[dept]);
+                    employeeBook.printAllInfo(employeeBook.department[dept - 1]);
                     break;
                 case 2:
-                    System.out.println("Общая зарплата сотрудников отдела " + dept + " за месяц: " +
-                            employeeBook.calculateTotalSalary(employeeBook.department[dept]));
+                    System.out.println("Общая зарплата сотрудников отдела №" + dept + " за месяц: " +
+                            employeeBook.calculateTotalSalary(employeeBook.department[dept - 1]));
                     break;
                 case 3:
-                    System.out.println("Сотрудник " + dept + " с наименьшей зарплатой: ");
-                    System.out.println(employeeBook.findMinSalary(employeeBook.department[dept]));
+                    System.out.println("Сотрудник отдела №" + dept + " с наименьшей зарплатой: ");
+                    System.out.println(employeeBook.findMinSalary(employeeBook.department[dept - 1]));
                     break;
                 case 4:
-                    System.out.println("Сотрудник " + dept + " с наибольшей зарплатой: ");
-                    System.out.println(employeeBook.findMaxSalary(employeeBook.department[dept]));
+                    System.out.println("Сотрудник отдела №" + dept + " с наибольшей зарплатой: ");
+                    System.out.println(employeeBook.findMaxSalary(employeeBook.department[dept - 1]));
                     break;
                 case 5:
-                    System.out.println("Среднее значение зарплат отдела " + dept + ": " +
-                            employeeBook.calculateAverageSalary(employeeBook.department[dept]));
+                    System.out.println("Среднее значение зарплат отдела №" + dept + ": " +
+                            employeeBook.calculateAverageSalary(employeeBook.department[dept - 1]));
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + deptCommand);

@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Employee {
     private int id;
     public static int counter;
@@ -67,17 +69,28 @@ public class Employee {
     @Override
     public String toString() {
         return "id=" + id +
-                ", Отдел " + dept +
+                ", " + dept +
                 ", Ф.И.О: " + secondName + ' ' +
                 firstName + ' ' +
                 middleName +
-                ", зарплата:" + salary + " рублей";
+                ", зарплата: " + salary + " рублей";
     }
     public String toString(Department dept) {
         return "id=" + id +
                 ", Ф.И.О: " + secondName + ' ' +
                 firstName + ' ' +
                 middleName +
-                ", зарплата:" + salary + " рублей";
+                ", зарплата: " + salary + " рублей";
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(firstName, employee.firstName) && Objects.equals(middleName, employee.middleName) && Objects.equals(secondName, employee.secondName);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, middleName, secondName);
     }
 }
