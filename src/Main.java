@@ -23,8 +23,11 @@ public class Main {
         System.out.println(employeeBook.employees[1].getID());
         Scanner scan = new Scanner(System.in);
         System.out.println("Добро пожаловать, бухгалтер");
+        System.out.println("Для работы с отделом введите его номер");
+        for (int i = 1; i <= employeeBook.department.length; i++) {
+            System.out.println(i + ". - " + employeeBook.department[i - 1]);
+        }
         System.out.println("Для работы со всеми сотрудниками введите '0'");
-        System.out.println("Для работы с отделом введите '1'");
         int command;
         command = scan.nextInt();
         if (command == 0) {
@@ -83,10 +86,8 @@ public class Main {
                 default:
                     throw new IllegalStateException("Unexpected value: " + workCommand);
             }
-        } else if (command == 1) {
-            System.out.println("Нужно ввести отдел");
-            int dept = scan.nextInt();
-            System.out.println("Вы выбрали отдел №" + dept + ", " + employeeBook.department[dept - 1]);
+        } else if (command > 0) {
+            System.out.println("Вы выбрали отдел №" + command + ", " + employeeBook.department[command - 1]);
             System.out.println("Список доступных действий:");
             System.out.println("1 - Распечатать полную информацию по сотрудникам");
             System.out.println("2 - Вывести сумму зарплат");
@@ -96,23 +97,23 @@ public class Main {
             int deptCommand = scan.nextInt();
             switch (deptCommand) {
                 case 1:
-                    employeeBook.printAllInfo(employeeBook.department[dept - 1]);
+                    employeeBook.printAllInfo(employeeBook.department[command - 1]);
                     break;
                 case 2:
-                    System.out.println("Общая зарплата сотрудников отдела №" + dept + " за месяц: " +
-                            employeeBook.calculateTotalSalary(employeeBook.department[dept - 1]));
+                    System.out.println("Общая зарплата сотрудников отдела №" + command + " за месяц: " +
+                            employeeBook.calculateTotalSalary(employeeBook.department[command - 1]));
                     break;
                 case 3:
-                    System.out.println("Сотрудник отдела №" + dept + " с наименьшей зарплатой: ");
-                    System.out.println(employeeBook.findMinSalary(employeeBook.department[dept - 1]));
+                    System.out.println("Сотрудник отдела №" + command + " с наименьшей зарплатой: ");
+                    System.out.println(employeeBook.findMinSalary(employeeBook.department[command - 1]));
                     break;
                 case 4:
-                    System.out.println("Сотрудник отдела №" + dept + " с наибольшей зарплатой: ");
-                    System.out.println(employeeBook.findMaxSalary(employeeBook.department[dept - 1]));
+                    System.out.println("Сотрудник отдела №" + command + " с наибольшей зарплатой: ");
+                    System.out.println(employeeBook.findMaxSalary(employeeBook.department[command - 1]));
                     break;
                 case 5:
-                    System.out.println("Среднее значение зарплат отдела №" + dept + ": " +
-                            employeeBook.calculateAverageSalary(employeeBook.department[dept - 1]));
+                    System.out.println("Среднее значение зарплат отдела №" + command + ": " +
+                            employeeBook.calculateAverageSalary(employeeBook.department[command - 1]));
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + deptCommand);
@@ -185,7 +186,7 @@ public class Main {
         }
         // распечатать список сотрудников
         public void printEmployeeList() {
-            System.out.println("СОтрудники предприятия:");
+            System.out.println("Сотрудники предприятия:");
             for (Employee employee : employees) {
                 if (employee != null) {
                     System.out.println(employee.getSecondName() + ' ' + employee.getFirstName()
@@ -270,7 +271,7 @@ public class Main {
                 }
             }
         }
-        public  int getEmployeeByID(int number) {
+        public int findByID(int number) {
             for (int i = 0; i< employees.length; i++) {
                 if (employees[i].getID() == number) {
                     return i;
@@ -295,7 +296,11 @@ public class Main {
             return -1;
         }
         public void deleteEmployeeByID(int employeeID) {
-            employees[getEmployeeByID(employeeID)] = null;
+           if (employeeID > employees.length || employeeID <= 0 || employeeID == findFreeSpace()) {
+               throw new RuntimeException("ID не существует или пуст");
+            } else {
+               employees[findByID(employeeID)] = null;
+            }
         }
         public void addNewEmployee(int deptNumber, String secondName, String firstName, String middleName, double salary) {
             if (checkFreeSpace()) {
@@ -312,6 +317,8 @@ public class Main {
                 String firstName = "";
                 String secondName = "";
                 String middleName = "";
+                System.out.println("Веедите номер отдела");
+                int deptNumber = scan.nextInt() - 1;
                 System.out.println("Веедите фамилию");
                 if (scan.hasNextLine()) {
                     secondName = scan.nextLine();
@@ -324,8 +331,6 @@ public class Main {
                 if (scan.hasNextLine()) {
                     middleName = scan.nextLine();
                 }
-                System.out.println("Веедите номер отдела");
-                int deptNumber = scan.nextInt() - 1;
                 System.out.println("Веедите значение заработной платы");
                 double salary = scan.nextDouble();
                 employees[free] = new Employee(departments[deptNumber], secondName, firstName, middleName, salary);
