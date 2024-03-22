@@ -26,7 +26,7 @@ public class Main {
         while (command >= 0) {
             System.out.println("Добро пожаловать, бухгалтер");
             System.out.println("Для работы с отделом введите его номер");
-            for (int i = 1; i <= employeeBook.departments.length; i++) {
+            for (int i = 1; i <= employeeBook.deptCount; i++) {
                 System.out.println(i + ". - " + employeeBook.departments[i - 1]);
             }
             System.out.println("Для работы со всеми сотрудниками введите '0'");
