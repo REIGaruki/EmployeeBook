@@ -3,11 +3,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         EmployeeBook employeeBook = new EmployeeBook();
-        employeeBook.department[0] = new Department("Первый");
-        employeeBook.department[1] = new Department("Второй");
-        employeeBook.department[2] = new Department("Третий");
-        employeeBook.department[3] = new Department("Четвертый");
-        employeeBook.department[4] = new Department("Пятый");
+        employeeBook.addNewDepartment("Первый");
+        employeeBook.addNewDepartment("Второй");
+        employeeBook.addNewDepartment("Третий");
+        employeeBook.addNewDepartment("Четвертый");
+        employeeBook.addNewDepartment("Пятый");
         // заполнение массива
         employeeBook.addNewEmployee(1, "Глинка", "Михаил", "Иванович", 30000);
         employeeBook.addNewEmployee(2, "Мусоргский", "Модест", "Петрович", 40000);
@@ -26,8 +26,8 @@ public class Main {
         while (command >= 0) {
             System.out.println("Добро пожаловать, бухгалтер");
             System.out.println("Для работы с отделом введите его номер");
-            for (int i = 1; i <= employeeBook.department.length; i++) {
-                System.out.println(i + ". - " + employeeBook.department[i - 1]);
+            for (int i = 1; i <= employeeBook.departments.length; i++) {
+                System.out.println(i + ". - " + employeeBook.departments[i - 1]);
             }
             System.out.println("Для работы со всеми сотрудниками введите '0'");
             System.out.println("Для выхода введите '-1'");
@@ -80,7 +80,7 @@ public class Main {
                         break;
                     case 8:
                         System.out.println("Веедите данные:");
-                        employeeBook.createNewEmployee(employeeBook.department);
+                        employeeBook.createNewEmployee(employeeBook.departments);
                         break;
                     case 9:
                         System.out.println("Веедите номер сотрудника которого хотите удалить:");
@@ -90,8 +90,8 @@ public class Main {
                     default:
                         throw new IllegalStateException("Unexpected value: " + workCommand);
                 }
-            } else if (command > 0 && command <= employeeBook.department.length) {
-                System.out.println("Вы выбрали отдел №" + command + ", " + employeeBook.department[command - 1]);
+            } else if (command > 0 && command <= employeeBook.departments.length) {
+                System.out.println("Вы выбрали отдел №" + command + ", " + employeeBook.departments[command - 1]);
                 System.out.println("Список доступных действий:");
                 System.out.println("1 - Распечатать полную информацию по сотрудникам");
                 System.out.println("2 - Вывести сумму зарплат");
@@ -100,7 +100,7 @@ public class Main {
                 System.out.println("5 - Вывести среднее значение зарплат");
                 System.out.println("6 - Произвести индексирование на процент");
                 int deptCommand = scan.nextInt();
-                Department dept = employeeBook.department[command - 1];
+                Department dept = employeeBook.departments[command - 1];
                 switch (deptCommand) {
                     case 1:
                         employeeBook.printAllInfo(dept);
@@ -141,7 +141,8 @@ public class Main {
     // конец метода main
     // конец метода main
     private static class EmployeeBook {
-        Department[] department = new Department[5];
+        private final Department[] departments = new Department[5];
+        private int deptCount;
         // объявление массива объектов "Отдел"
         private final Employee[] employees = new Employee[11];
         // распечатка полной инофрмации в списке сотрудников
@@ -323,10 +324,17 @@ public class Main {
                employees[findByID(employeeID)] = null;
             }
         }
+        public void addNewDepartment(String departmentName) {
+            if (deptCount >= departments.length) {
+                System.out.println("Нельзя добавить отдел");
+            } else {
+                departments[deptCount++] = new Department(departmentName);
+            }
+        }
         public void addNewEmployee(int deptNumber, String secondName, String firstName, String middleName, double salary) {
             if (checkFreeSpace()) {
                 int free = findFreeSpace();
-                employees[free] = new Employee(department[deptNumber - 1], secondName, firstName, middleName, salary);
+                employees[free] = new Employee(departments[deptNumber - 1], secondName, firstName, middleName, salary);
             }  else {
                 System.out.println("EMPLOYEE BOOK IS FULL");
             }
