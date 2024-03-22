@@ -8,6 +8,8 @@ public class Main {
         employeeBook.addNewDepartment("Третий");
         employeeBook.addNewDepartment("Четвертый");
         employeeBook.addNewDepartment("Пятый");
+        employeeBook.addNewDepartment("Шестой");
+        employeeBook.addNewDepartment("Седьмой");
         // заполнение массива
         employeeBook.addNewEmployee(1, "Глинка", "Михаил", "Иванович", 30000);
         employeeBook.addNewEmployee(2, "Мусоргский", "Модест", "Петрович", 40000);
@@ -141,7 +143,7 @@ public class Main {
     // конец метода main
     // конец метода main
     private static class EmployeeBook {
-        private final Department[] departments = new Department[5];
+        private final Department[] departments = new Department[9];
         private int deptCount;
         // объявление массива объектов "Отдел"
         private final Employee[] employees = new Employee[11];
@@ -247,7 +249,7 @@ public class Main {
         }
         // нахождение сотрудника отдела с минимальной зарплатой
         public Employee findMinSalary(Department dept) {
-            int minSalaryEmployee = 0;
+            int minSalaryEmployee = -1;
             double minimalSalary = Integer.MAX_VALUE;
             for (int i = 0; i < employees.length; i++) {
                 if (employees[i] != null && employees[i].getSalary() < minimalSalary &&
@@ -261,7 +263,7 @@ public class Main {
         // нахождение сотрудника с максимальной зарплатой
         public Employee findMaxSalary(Department dept) {
             double maximalSalary = 0;
-            int maxSalaryEmployee = 0;
+            int maxSalaryEmployee = -1;
             for (int i = 0; i < employees.length; i++) {
                 if (employees[i] != null && employees[i].getSalary() > maximalSalary &&
                         dept.equals(employees[i].getDept())) {
