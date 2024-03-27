@@ -75,7 +75,12 @@ public class Employee {
                 middleName +
                 ", зарплата: " + salary + " рублей";
     }
-    public String toString(Department dept) {
+    public String toStringOnlyName() {
+        return secondName + ' ' +
+                firstName + ' ' +
+                middleName;
+    }
+    public String toStringWithoutDepartment() {
         return "id=" + id +
                 ", Ф.И.О: " + secondName + ' ' +
                 firstName + ' ' +
